@@ -9,6 +9,12 @@ export default function Navbar() {
         setNavbar(!navbarState);
     }
 
+    const handleLogout = e => {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.reload();
+    }
+
     const username = localStorage.getItem('userName');
 
     return (
@@ -18,7 +24,7 @@ export default function Navbar() {
                     <i className='bx bxs-wallet'></i>
                     <div className="logo_name">PayrollApp</div>
                 </div>
-                <i className='bx bx-menu' id="btn" onClick={e => toggleSidebar(e)}></i>
+                <i className='bx bx-menu hover:cursor-pointer' id="btn" onClick={e => toggleSidebar(e)}></i>
             </div>
             <ul className="nav_list">
                 <li>
@@ -51,7 +57,7 @@ export default function Navbar() {
                             <div className="job">HRD</div>
                         </div>
                 </div>
-                <i className='bx bx-log-out' id="logout"></i>
+                <i className='bx bx-log-out hover:cursor-pointer' onClick={e => handleLogout(e)} id="logout"></i>
             </div>
         </div>
         </div>
