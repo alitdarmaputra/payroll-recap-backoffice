@@ -5,7 +5,6 @@ import RouteGuard from "../RouteGuard/RouteGuard";
 //pages
 import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
-import Preferences from "../Preferences/Preferences"
 
 function RoutesComponent() {
    return (
@@ -13,11 +12,10 @@ function RoutesComponent() {
             <Route path="/" 
                 element={
                     <RouteGuard>
-                        <Dashboard /> 
+                        <Dashboard />
                     </RouteGuard>
                 }
             >
-                <Route path="preferences" element={<Preferences />}></Route>
             </Route>
             <Route
                 path="/login"

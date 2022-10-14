@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef, useState } from "react"
 import { setAuthToken } from "../../Utils/utils";
 import httpRequest from "../../config/http-request.config";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
     const [isHidePassword, setHidePassword] = useState(true);
@@ -27,10 +28,14 @@ export default function Login() {
 
         try {
            const response = await axios.post(`${httpRequest.api.baseUrl}/auth/login`, data);
-           const token = response.data.token;
+
+           const token = response.data;
+           const { id, username} = response.data.data;
 
            localStorage.setItem("token", token);
-           
+           localStorage.setItem("userId", id);
+           localStorage.setItem("userName", username);
+
            setAuthToken(token);
            window.location.href = '/';
         } catch(err) {
