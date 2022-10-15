@@ -1,4 +1,7 @@
+import axios from "axios";
 import { useRef, useState } from "react"
+import { Link } from "react-router-dom";
+import httpRequest from "../../../config/http-request.config";
 
 export default function Navbar() {
     const [navbarState, setNavbar] = useState(false);
@@ -11,6 +14,7 @@ export default function Navbar() {
 
     const handleLogout = e => {
         e.preventDefault();
+        axios.post(`${httpRequest.api.baseUrl}/auth/logout`);
         localStorage.clear();
         window.location.reload();
     }
@@ -18,7 +22,7 @@ export default function Navbar() {
     const username = localStorage.getItem('userName');
 
     return (
-        <div ref={sideBar} className={`sidebar ${navbarState && 'active'}`}>
+        <div ref={sideBar} className={`sidebar ${navbarState && 'active'} z-50`}>
             <div className="logo_content">
                 <div className="logo">
                     <i className='bx bxs-wallet'></i>
@@ -28,24 +32,24 @@ export default function Navbar() {
             </div>
             <ul className="nav_list">
                 <li>
-                    <a href="#">
+                    <Link to="/payroll">
                         <i className='bx bx-grid-alt' ></i>
                         <span className="links_name">Payroll</span>
-                    </a>
+                    </Link>
                     <span className="tooltip">List Payroll</span>
                 </li>
                 <li>
-                    <a href="#">
+                    <Link to="employee">
                         <i className='bx bx-pie-chart' ></i>
                         <span className="links_name">Employee</span>
-                    </a>
+                    </Link>
                     <span className="tooltip">List Employees</span>
                 </li>
                 <li>
-                    <a href="#">
+                    <Link to="HRD">
                         <i className='bx bx-user' ></i>
                         <span className="links_name">HRD</span>
-                    </a>
+                    </Link>
                     <span className="tooltip">List HRDs</span>
                 </li>
             </ul>

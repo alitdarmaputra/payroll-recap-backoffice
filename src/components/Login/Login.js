@@ -2,7 +2,6 @@ import axios from "axios";
 import { useRef, useState } from "react"
 import { setAuthToken } from "../../Utils/utils";
 import httpRequest from "../../config/http-request.config";
-import { Navigate } from "react-router-dom";
 
 export default function Login() {
     const [isHidePassword, setHidePassword] = useState(true);

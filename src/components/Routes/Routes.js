@@ -5,6 +5,8 @@ import RouteGuard from "../RouteGuard/RouteGuard";
 //pages
 import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
+import Payroll from "../Payroll/Payroll";
+import PayrollCreate from "../Payroll/Payroll-create";
 
 function RoutesComponent() {
    return (
@@ -16,6 +18,8 @@ function RoutesComponent() {
                     </RouteGuard>
                 }
             >
+                <Route path="payroll" element={<Payroll />} />
+                <Route path="payroll/create" element={<PayrollCreate/>} />
             </Route>
             <Route
                 path="/login"
