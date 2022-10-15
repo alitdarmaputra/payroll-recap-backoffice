@@ -29,9 +29,7 @@ export default function Login() {
         try {
            const response = await axios.post(`${httpRequest.api.baseUrl}/auth/login`, data);
 
-           const token = response.data;
-           const { id, username} = response.data.data;
-
+           const { token, id, username} = response.data;
            localStorage.setItem("token", token);
            localStorage.setItem("userId", id);
            localStorage.setItem("userName", username);
