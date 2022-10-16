@@ -6,6 +6,7 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
+
       <div className='home_content p-10'>
         <Outlet />
       </div>

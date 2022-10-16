@@ -28,10 +28,12 @@ export default function Login() {
         try {
            const response = await axios.post(`${httpRequest.api.baseUrl}/auth/login`, data);
 
-           const { token, id, username} = response.data;
+           const { token } = response.data;
+           const { username, id } = response.data.data;
+           
            localStorage.setItem("token", token);
            localStorage.setItem("userId", id);
-           localStorage.setItem("userName", username);
+           localStorage.setItem("username", username);
 
            setAuthToken(token);
            window.location.href = '/';
@@ -42,7 +44,7 @@ export default function Login() {
 
     return (
         <div className="flex h-screen justify-center item-center login-wrapper">
-            <div className="m-auto w-2/3 text-center login">
+            <div className="m-auto w-96 text-center login">
                 <div className="mb-9 login-head">
                     <i className="text-6xl mb-2 fa-solid fa-money-bills"></i>
                     <h1 className="text-sm text-slate-400">Payroll Recap App</h1>

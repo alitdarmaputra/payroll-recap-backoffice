@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import httpRequest from "../../config/http-request.config";
 
 export default function PayrollCreate() {
@@ -43,8 +44,11 @@ export default function PayrollCreate() {
         getEmployees();
     }, []);
 
+    const navigate = useNavigate();
+
     return (
         <>
+            <i onClick={() => navigate(-1)} className="hover:cursor-pointer text-2xl fa-solid fa-arrow-left mb-8"></i>
             <div className="content w-5/6 bg-white p-5 rounded-md shadow-xl">
                 <h1 className="text-4xl mb-9 font-bold">Buat Claim</h1>
                 <form onSubmit={e => handleSubmit(e)}>
@@ -70,7 +74,7 @@ export default function PayrollCreate() {
                     <input ref={input.periode} className="w-full rounded-md indent-3 py-2 border-2 mb-5" type="month"></input>
 
                     <h2 className="font-bold text-md mb-3">Nama Employee</h2>
-                    <select ref={input.employee} className="mb-5 indent-3 w-full py-2 bg-transparent border-2 rounded-md input-type">
+                    <select ref={input.employee} className="mb-16 indent-3 w-full py-2 bg-transparent border-2 rounded-md input-type">
                         {employees.length !== 0 && employees.map(employee => {
                             return <option value={employee.id}>{employee.full_name}</option>
                         })}

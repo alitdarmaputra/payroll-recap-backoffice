@@ -5,6 +5,8 @@ import httpRequest from "../../../config/http-request.config";
 
 export default function Navbar() {
     const [navbarState, setNavbar] = useState(false);
+    const [activeNav, setActiveNav] = useState(0);
+
     const sideBar = useRef();
 
     const toggleSidebar = e => {
@@ -19,51 +21,53 @@ export default function Navbar() {
         window.location.reload();
     }
 
-    const username = localStorage.getItem('userName');
+    const username = localStorage.getItem('username');
 
     return (
         <div ref={sideBar} className={`sidebar ${navbarState && 'active'} z-50`}>
             <div className="logo_content">
-                <div className="logo">
-                    <i className='bx bxs-wallet'></i>
-                    <div className="logo_name">PayrollApp</div>
-                </div>
+                <Link to="/">
+                    <div className="logo">
+                        <i className='bx bxs-wallet'></i>
+                        <div className="logo_name">PayrollApp</div>
+                    </div>
+                </Link>
                 <i className='bx bx-menu hover:cursor-pointer' id="btn" onClick={e => toggleSidebar(e)}></i>
             </div>
             <ul className="nav_list">
-                <li>
+                <li onClick={() => setActiveNav(1)}>
                     <Link to="/payroll">
-                        <i className='bx bx-grid-alt' ></i>
-                        <span className="links_name">Payroll</span>
+                        <i className={`${activeNav === 1 && 'text-sky-300'} bx bx-grid-alt`}></i>
+                        <span className={`${activeNav === 1 && 'text-sky-300'} links_name`}>Payroll</span>
                     </Link>
                     <span className="tooltip">List Payroll</span>
                 </li>
-                <li>
-                    <Link to="employee">
-                        <i className='bx bx-pie-chart' ></i>
-                        <span className="links_name">Employee</span>
+                <li onClick={() => setActiveNav(2)}>
+                    <Link to="/employee">
+                        <i class={`${activeNav === 2 && 'text-sky-300'} fa-solid fa-briefcase`}></i>
+                        <span className={`${activeNav === 2 && 'text-sky-300'} links_name`}>Employee</span>
                     </Link>
                     <span className="tooltip">List Employees</span>
                 </li>
-                <li>
-                    <Link to="HRD">
-                        <i className='bx bx-user' ></i>
-                        <span className="links_name">HRD</span>
+                <li onClick={() => setActiveNav(3)}>
+                    <Link to="/hrd">
+                        <i className={`${activeNav === 3 && 'text-sky-300'} bx bx-user`}></i>
+                        <span className={`${activeNav === 3 && 'text-sky-300'} links_name`}>HRD</span>
                     </Link>
                     <span className="tooltip">List HRDs</span>
                 </li>
             </ul>
             <div className="profile_content">
-            <div className="profile">
-                <div className="profile_details">
+                <div className="profile">
+                    <div className="profile_details">
                         <div className="name_job">
                             <div className="name">{username}</div>
                             <div className="job">HRD</div>
                         </div>
+                    </div>
+                    <i className='bx bx-log-out hover:cursor-pointer' onClick={e => handleLogout(e)} id="logout"></i>
                 </div>
-                <i className='bx bx-log-out hover:cursor-pointer' onClick={e => handleLogout(e)} id="logout"></i>
             </div>
-        </div>
         </div>
     )
 }
